@@ -99,4 +99,10 @@ it("ingresar un número no descuenta vidas", () => {
   expect(juego.vidas()).toBe(6);
 });
 
+it("ingresar un número informa entrada inválida", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("1");
+  expect(juego.mensaje()).toBe("Entrada inválida");
+});
+
 });
