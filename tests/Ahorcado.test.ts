@@ -36,4 +36,10 @@ it("fallar una letra descuenta una vida", () => {
   expect(juego.vidas()).toBe(5);
 });
 
+it("fallar una letra no modifica la palabra enmascarada", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("E");
+  expect(juego.palabraEnmascarada()).toBe("_ _ _ _");
+});
+
 });
