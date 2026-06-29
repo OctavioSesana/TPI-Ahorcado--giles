@@ -93,4 +93,10 @@ it("repetir una letra ya intentada informa que ya fue ingresada", () => {
   expect(juego.mensaje()).toBe("Letra ya ingresada");
 });
 
+it("ingresar un número no descuenta vidas", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("1");
+  expect(juego.vidas()).toBe(6);
+});
+
 });
