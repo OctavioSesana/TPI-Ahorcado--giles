@@ -57,4 +57,15 @@ it("gano() devuelve false con letras pendientes", () => {
   expect(juego.gano()).toBe(false);
 });
 
+it("perdio() devuelve true al llegar a 0 vidas", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("E");
+  juego.adivinar("I");
+  juego.adivinar("U");
+  juego.adivinar("B");
+  juego.adivinar("C");
+  juego.adivinar("D");
+  expect(juego.perdio()).toBe(true);
+});
+
 });
