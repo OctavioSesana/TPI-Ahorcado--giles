@@ -32,3 +32,11 @@ Given("una lista de palabras que contiene solo {string}", async ({ page }, palab
 When("el jugador presiona {string}", async ({ page }, boton: string) => {
   await page.getByRole("button", { name: boton }).click();
 });
+
+Then("se ve un botón {string}", async ({ page }, nombre: string) => {
+  await expect(page.getByRole("button", { name: nombre })).toBeVisible();
+});
+
+Then("no se ve el mensaje {string}", async ({ page }, mensaje: string) => {
+  await expect(page.getByTestId("message")).not.toHaveText(mensaje);
+});
