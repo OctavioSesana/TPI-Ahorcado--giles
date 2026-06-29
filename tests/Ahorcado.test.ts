@@ -42,4 +42,13 @@ it("fallar una letra no modifica la palabra enmascarada", () => {
   expect(juego.palabraEnmascarada()).toBe("_ _ _ _");
 });
 
+it("gano() devuelve true al revelar todas las letras", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("G");
+  juego.adivinar("A");
+  juego.adivinar("T");
+  juego.adivinar("O");
+  expect(juego.gano()).toBe(true);
+});
+
 });
