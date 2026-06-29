@@ -68,4 +68,10 @@ it("perdio() devuelve true al llegar a 0 vidas", () => {
   expect(juego.perdio()).toBe(true);
 });
 
+it("perdio() devuelve false con vidas restantes", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("E");
+  expect(juego.perdio()).toBe(false);
+});
+
 });
