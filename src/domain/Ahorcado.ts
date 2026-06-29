@@ -26,4 +26,8 @@ palabraEnmascarada(): string {
   vidas(): number {
     return this.vidasRestantes;
   }
+
+  gano(): boolean {
+  return this.palabra.split("").every(l => this.letrasAdivinadas.includes(l));
+}
 }
