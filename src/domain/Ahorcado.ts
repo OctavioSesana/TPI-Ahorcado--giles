@@ -8,7 +8,12 @@ export class Ahorcado {
   }
 
   adivinar(letra: string): void {
-  this.letrasAdivinadas.push(letra.toUpperCase());
+  const l = letra.toUpperCase();
+  if (this.palabra.includes(l)) {
+    this.letrasAdivinadas.push(l);
+  } else {
+    this.vidasRestantes--;
+  }
 }
 
 palabraEnmascarada(): string {
