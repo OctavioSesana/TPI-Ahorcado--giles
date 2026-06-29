@@ -2,18 +2,26 @@ export class Ahorcado {
   private palabra: string;
   private vidasRestantes : number = 6;
   private letrasAdivinadas: string[] = [];
+  private letrasIntentadas: string[] = [];
+  private mensajeActual: string = "";
 
   constructor(palabra: string) {
     this.palabra = palabra;
   }
 
-  adivinar(letra: string): void {
+ adivinar(letra: string): void {
   const l = letra.toUpperCase();
+  if (this.letrasIntentadas.includes(l)) {
+    this.mensajeActual = "Letra ya ingresada";
+    return;
+  }
+  this.letrasIntentadas.push(l);
   if (this.palabra.includes(l)) {
     this.letrasAdivinadas.push(l);
   } else {
     this.vidasRestantes--;
   }
+  this.mensajeActual = "";
 }
 
 palabraEnmascarada(): string {
@@ -38,4 +46,9 @@ perdio(): boolean {
 palabraRevelada(): string {
   return this.palabra;
 }
+
+mensaje(): string {
+  return this.mensajeActual;
+}
+
 }
