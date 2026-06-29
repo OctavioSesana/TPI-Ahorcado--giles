@@ -74,4 +74,9 @@ it("perdio() devuelve false con vidas restantes", () => {
   expect(juego.perdio()).toBe(false);
 });
 
+it("palabraRevelada() devuelve la palabra completa", () => {
+  const juego = new Ahorcado("GATO");
+  expect(juego.palabraRevelada()).toBe("GATO");
+});
+
 });
