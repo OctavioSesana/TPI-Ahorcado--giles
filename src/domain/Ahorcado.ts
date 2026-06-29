@@ -60,4 +60,12 @@ mensaje(): string {
   return this.mensajeActual;
 }
 
+reiniciar(nuevaPalabra: string): void {
+  this.palabra = nuevaPalabra;
+  this.vidasRestantes = 6;
+  this.letrasAdivinadas = [];
+  this.letrasIntentadas = [];
+  this.mensajeActual = "";
+}
+
 }

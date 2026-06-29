@@ -113,10 +113,10 @@ it("elige una palabra de la lista usando el selector inyectado", () => {
 
 it("reiniciar() resetea las vidas y la palabra enmascarada", () => {
   const juego = new Ahorcado("GATO");
-  juego.adivinar("E"); // falla, vidas = 5
-  juego.reiniciar("PERRO");
+  juego.adivinar("E");
+  juego.reiniciar("OSO");
   expect(juego.vidas()).toBe(6);
-  expect(juego.palabraEnmascarada()).toBe("    _");
+  expect(juego.palabraEnmascarada()).toBe("_ _ _");
 });
 
 });
