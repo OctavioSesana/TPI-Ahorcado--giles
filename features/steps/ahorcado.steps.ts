@@ -24,3 +24,11 @@ When("el jugador adivina la letra {string}", async ({ page }, letra: string) => 
 Then("se ve el mensaje {string}", async ({ page }, mensaje: string) => {
   await expect(page.getByTestId("message")).toHaveText(mensaje);
 });
+
+Given("una lista de palabras que contiene solo {string}", async ({ page }, palabra: string) => {
+  await page.goto(`/?lista=${palabra}`);
+});
+
+When("el jugador presiona {string}", async ({ page }, boton: string) => {
+  await page.getByRole("button", { name: boton }).click();
+});
