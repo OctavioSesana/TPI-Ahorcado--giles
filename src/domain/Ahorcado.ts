@@ -34,4 +34,8 @@ palabraEnmascarada(): string {
 perdio(): boolean {
   return this.vidasRestantes === 0;
 }
+
+palabraRevelada(): string {
+  return this.palabra;
+}
 }
