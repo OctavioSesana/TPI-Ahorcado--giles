@@ -79,4 +79,11 @@ it("palabraRevelada() devuelve la palabra completa", () => {
   expect(juego.palabraRevelada()).toBe("GATO");
 });
 
+it("repetir una letra ya intentada no descuenta vidas", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("A");
+  juego.adivinar("A");
+  expect(juego.vidas()).toBe(6);
+});
+
 });
