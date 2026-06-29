@@ -24,4 +24,10 @@ it("acertar una letra no descuenta vidas", () => {
   expect(juego.vidas()).toBe(6);
 });
 
+it("es case-insensitive al adivinar", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("g");
+  expect(juego.palabraEnmascarada()).toBe("G _ _ _");
+});
+
 });
