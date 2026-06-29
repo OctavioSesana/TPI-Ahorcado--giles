@@ -8,6 +8,7 @@ export function render(app: HTMLElement, palabra: string): void {
       <input type="text" />
       <div data-testid="word">${juego.palabraEnmascarada()}</div>
       <div data-testid="lives">${juego.vidas()}</div>
+      ${juego.gano() ? `<div data-testid="message">GANASTE</div>` : ""}
     `;
 
     const input = app.querySelector("input")!;
