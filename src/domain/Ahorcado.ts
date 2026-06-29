@@ -68,4 +68,8 @@ reiniciar(nuevaPalabra: string): void {
   this.mensajeActual = "";
 }
 
+errores(): number {
+  return 6 - this.vidasRestantes;
+}
+
 }
