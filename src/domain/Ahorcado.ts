@@ -11,6 +11,10 @@ export class Ahorcado {
 
  adivinar(letra: string): void {
   const l = letra.toUpperCase();
+  if (!/^[A-ZÀ-Ú]$/.test(l)) {
+    this.mensajeActual = "Entrada inválida";
+    return;
+  }
   if (this.letrasIntentadas.includes(l)) {
     this.mensajeActual = "Letra ya ingresada";
     return;
