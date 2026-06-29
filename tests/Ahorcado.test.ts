@@ -17,4 +17,11 @@ describe("Ahorcado", () => {
   juego.adivinar("A");
   expect(juego.palabraEnmascarada()).toBe("A _ A");
 });
+
+it("acertar una letra no descuenta vidas", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("G");
+  expect(juego.vidas()).toBe(6);
+});
+
 });
