@@ -30,4 +30,10 @@ it("es case-insensitive al adivinar", () => {
   expect(juego.palabraEnmascarada()).toBe("G _ _ _");
 });
 
+it("fallar una letra descuenta una vida", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("E");
+  expect(juego.vidas()).toBe(5);
+});
+
 });
