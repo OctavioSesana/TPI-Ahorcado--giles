@@ -9,12 +9,17 @@ const word = params.get("word");
 const lista = params.get("lista");
 
 let juego: Ahorcado;
+let listaActual: string[];
+
 if (word !== null) {
   juego = new Ahorcado(word);
+  listaActual = [word];
 } else if (lista !== null) {
   juego = new Ahorcado([lista]);
+  listaActual = [lista];
 } else {
   juego = new Ahorcado(LISTA);
+  listaActual = LISTA;
 }
 
-render(app, juego, word !== null);
+render(app, juego, listaActual, word !== null);
