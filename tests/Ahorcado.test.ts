@@ -86,4 +86,11 @@ it("repetir una letra ya intentada no descuenta vidas", () => {
   expect(juego.vidas()).toBe(6);
 });
 
+it("repetir una letra ya intentada informa que ya fue ingresada", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("A");
+  juego.adivinar("A");
+  expect(juego.mensaje()).toBe("Letra ya ingresada");
+});
+
 });
