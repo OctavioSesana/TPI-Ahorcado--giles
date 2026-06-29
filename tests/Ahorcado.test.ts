@@ -111,4 +111,12 @@ it("elige una palabra de la lista usando el selector inyectado", () => {
   expect(juego.palabraEnmascarada()).toBe("_ _ _ _ _");
 });
 
+it("reiniciar() resetea las vidas y la palabra enmascarada", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("E"); // falla, vidas = 5
+  juego.reiniciar("PERRO");
+  expect(juego.vidas()).toBe(6);
+  expect(juego.palabraEnmascarada()).toBe("    _");
+});
+
 });
