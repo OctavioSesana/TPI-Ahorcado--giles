@@ -15,6 +15,7 @@ export function render(app: HTMLElement, juego: Ahorcado, lista: string[], arran
       <div data-testid="word">${juego.perdio() ? juego.palabraRevelada() : juego.palabraEnmascarada()}</div>
       <div data-testid="lives">${juego.vidas()}</div>
       <div data-testid="message">${juego.gano() ? "GANASTE" : juego.perdio() ? "PERDISTE" : juego.mensaje()}</div>
+      <div data-testid="hangman-parts" data-parts="${juego.errores()}"></div>
       ${terminado ? `<button>Jugar de nuevo</button>` : ""}
     `;
 
