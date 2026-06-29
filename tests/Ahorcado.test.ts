@@ -51,4 +51,10 @@ it("gano() devuelve true al revelar todas las letras", () => {
   expect(juego.gano()).toBe(true);
 });
 
+it("gano() devuelve false con letras pendientes", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("G");
+  expect(juego.gano()).toBe(false);
+});
+
 });
