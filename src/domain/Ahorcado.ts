@@ -5,8 +5,13 @@ export class Ahorcado {
   private letrasIntentadas: string[] = [];
   private mensajeActual: string = "";
 
-  constructor(palabra: string) {
-    this.palabra = palabra;
+  constructor(palabraOLista: string | string[], selector?: (n: number) => number) {
+    if (Array.isArray(palabraOLista)) {
+      const idx = selector ? selector(palabraOLista.length) : Math.floor(Math.random() * palabraOLista.length);
+      this.palabra = palabraOLista[idx];
+    } else {
+      this.palabra = palabraOLista;
+    }
   }
 
  adivinar(letra: string): void {
