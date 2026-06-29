@@ -6,9 +6,10 @@ export function render(app: HTMLElement, palabra: string): void {
   function renderizar(): void {
     app.innerHTML = `
       <input type="text" />
-      <div data-testid="word">${juego.palabraEnmascarada()}</div>
+      <div data-testid="word">${juego.perdio() ? juego.palabraRevelada() : juego.palabraEnmascarada()}</div>
       <div data-testid="lives">${juego.vidas()}</div>
       ${juego.gano() ? `<div data-testid="message">GANASTE</div>` : ""}
+      ${juego.perdio() ? `<div data-testid="message">PERDISTE</div>` : ""}
     `;
 
     const input = app.querySelector("input")!;
