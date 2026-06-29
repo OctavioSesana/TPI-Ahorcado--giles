@@ -105,4 +105,10 @@ it("ingresar un número informa entrada inválida", () => {
   expect(juego.mensaje()).toBe("Entrada inválida");
 });
 
+it("elige una palabra de la lista usando el selector inyectado", () => {
+  const lista = ["GATO", "PERRO", "PATO"];
+  const juego = new Ahorcado(lista, () => 1); // siempre elige índice 1 = "PERRO"
+  expect(juego.palabraEnmascarada()).toBe("_ _ _ _ _");
+});
+
 });
