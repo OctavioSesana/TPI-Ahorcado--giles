@@ -6,4 +6,9 @@ describe("Ahorcado", () => {
     const juego = new Ahorcado("GATO");
     expect(juego.palabraEnmascarada()).toBe("_ _ _ _");
   });
+
+  it("tiene 6 vidas al iniciar", () => {
+    const juego = new Ahorcado("GATO");
+    expect(juego.vidas()).toBe(6);
+  });
 });
