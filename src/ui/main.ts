@@ -35,6 +35,9 @@ export function render(app: HTMLElement, juego: Ahorcado, lista: string[], arran
       <div data-testid="message">${juego.gano() ? "GANASTE" : juego.perdio() ? "PERDISTE" : juego.mensaje()}</div>
       <div data-testid="hangman-parts" data-parts="${juego.errores()}">${hangmanSVG(juego.errores())}</div>
       ${terminado ? `<button>Jugar de nuevo</button>` : ""}
+      <div>${"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(l =>
+        `<button data-testid="key-${l}"${juego.letraUsada(l) ? " disabled" : ""}>${l}</button>`
+      ).join("")}</div>
     `;
 
     const input = app.querySelector("input")!;
@@ -43,6 +46,14 @@ export function render(app: HTMLElement, juego: Ahorcado, lista: string[], arran
         juego.adivinar(input.value);
         renderizar();
       }
+    });
+
+    app.querySelectorAll<HTMLButtonElement>("[data-testid^='key-']").forEach(btn => {
+      const letra = btn.getAttribute("data-testid")!.replace("key-", "");
+      btn.addEventListener("click", () => {
+        juego.adivinar(letra);
+        renderizar();
+      });
     });
 
     if (terminado) {
