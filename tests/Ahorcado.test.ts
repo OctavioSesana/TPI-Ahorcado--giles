@@ -135,4 +135,9 @@ it("letraUsada() devuelve true para letras ya intentadas", () => {
   expect(juego.letraUsada("G")).toBe(false);
 });
 
+it("categoria() devuelve la categoría de la palabra", () => {
+  const juego = new Ahorcado("GATO", undefined, "Animal");
+  expect(juego.categoria()).toBe("Animal");
+});
+
 });
