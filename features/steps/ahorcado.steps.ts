@@ -48,3 +48,11 @@ Then("se ven {int} partes del ahorcado", async ({ page }, partes: number) => {
 Then("se ve {int} parte del ahorcado", async ({ page }, partes: number) => {
   await expect(page.getByTestId("hangman-parts")).toHaveAttribute("data-parts", String(partes));
 });
+
+When("el jugador hace click en la letra {string}", async ({ page }, letra: string) => {
+  await page.getByTestId(`key-${letra}`).click();
+});
+
+Then("el botón {string} está deshabilitado", async ({ page }, letra: string) => {
+  await expect(page.getByTestId(`key-${letra}`)).toBeDisabled();
+});
