@@ -126,4 +126,13 @@ it("errores() devuelve la cantidad de letras falladas", () => {
   expect(juego.errores()).toBe(2);
 });
 
+it("letraUsada() devuelve true para letras ya intentadas", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("A");
+  juego.adivinar("E");
+  expect(juego.letraUsada("A")).toBe(true);
+  expect(juego.letraUsada("E")).toBe(true);
+  expect(juego.letraUsada("G")).toBe(false);
+});
+
 });
