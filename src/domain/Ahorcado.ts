@@ -72,4 +72,8 @@ errores(): number {
   return 6 - this.vidasRestantes;
 }
 
+letraUsada(letra: string): boolean {
+  return this.letrasIntentadas.includes(letra.toUpperCase());
+}
+
 }
