@@ -7,12 +7,13 @@ const app = document.getElementById("app")!;
 const params = new URLSearchParams(window.location.search);
 const word = params.get("word");
 const lista = params.get("lista");
+const categoria = params.get("categoria") ?? "";
 
 let juego: Ahorcado;
 let listaActual: string[];
 
 if (word !== null) {
-  juego = new Ahorcado(word);
+  juego = new Ahorcado(word, undefined, categoria);
   listaActual = [word];
 } else if (lista !== null) {
   juego = new Ahorcado([lista]);

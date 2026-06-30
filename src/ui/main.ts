@@ -35,6 +35,7 @@ export function render(app: HTMLElement, juego: Ahorcado, lista: string[], arran
       <div data-testid="message">${juego.gano() ? "GANASTE" : juego.perdio() ? "PERDISTE" : juego.mensaje()}</div>
       <div data-testid="hangman-parts" data-parts="${juego.errores()}">${hangmanSVG(juego.errores())}</div>
       ${terminado ? `<button>Jugar de nuevo</button>` : ""}
+      <button>Ver pista</button>
       <div>${"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(l =>
         `<button data-testid="key-${l}"${juego.letraUsada(l) ? " disabled" : ""}>${l}</button>`
       ).join("")}</div>
@@ -55,6 +56,12 @@ export function render(app: HTMLElement, juego: Ahorcado, lista: string[], arran
         renderizar();
       });
     });
+
+    Array.from(app.querySelectorAll<HTMLButtonElement>("button"))
+      .find(b => b.textContent === "Ver pista")!
+      .addEventListener("click", () => {
+        app.querySelector<HTMLElement>("[data-testid='message']")!.textContent = juego.categoria();
+      });
 
     if (terminado) {
       app.querySelector("button")!.addEventListener("click", () => {
