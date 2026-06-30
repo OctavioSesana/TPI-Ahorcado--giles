@@ -56,3 +56,7 @@ When("el jugador hace click en la letra {string}", async ({ page }, letra: strin
 Then("el botón {string} está deshabilitado", async ({ page }, letra: string) => {
   await expect(page.getByTestId(`key-${letra}`)).toBeDisabled();
 });
+
+Given("una partida con la palabra {string} de categoría {string}", async ({ page }, palabra: string, categoria: string) => {
+  await page.goto(`/?word=${palabra}&categoria=${categoria}`);
+});
