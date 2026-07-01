@@ -74,7 +74,9 @@ jobs:
 
       - name: Quality gate - fail on findings
         run: |
-          COUNT=$(jq '[.runs[].results[] | select(.level=="error" or .level=="warning")] | length' sarif-results/javascript-typescript.sarif)
+          echo "Archivos SARIF generados:"
+          ls -la sarif-results/
+          COUNT=$(jq -s '[.[].runs[].results[] | select(.level=="error" or .level=="warning")] | length' sarif-results/*.sarif)
           echo "Hallazgos de CodeQL (error/warning): $COUNT"
           if [ "$COUNT" -gt 0 ]; then
             echo "::error::CodeQL encontró $COUNT hallazgo(s) de severidad error/warning. Quality gate falló."
