@@ -18,7 +18,7 @@ function hangmanSVG(errores: number): string {
   </svg>`;
 }
 
-export function render(app: HTMLElement, juego: Ahorcado, lista: string[], arranco: boolean): void {
+export function render(app: HTMLElement, juego: Ahorcado, lista: { palabra: string; categoria: string }[], arranco: boolean): void {
   if (!arranco) {
     app.innerHTML = `<button>Comenzar juego</button>`;
     app.querySelector("button")!.addEventListener("click", () => render(app, juego, lista, true));
@@ -65,8 +65,8 @@ export function render(app: HTMLElement, juego: Ahorcado, lista: string[], arran
 
     if (terminado) {
       app.querySelector("button")!.addEventListener("click", () => {
-        const nuevaPalabra = lista[Math.floor(Math.random() * lista.length)];
-        juego.reiniciar(nuevaPalabra);
+        const elegida = lista[Math.floor(Math.random() * lista.length)];
+        juego.reiniciar(elegida.palabra, elegida.categoria);
         renderizar();
       });
     }
