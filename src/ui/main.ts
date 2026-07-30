@@ -2,148 +2,145 @@ import { Ahorcado } from "../domain/Ahorcado";
 
 function hangmanSVG(errores: number): string {
   const partes = [
-    `<circle cx="60" cy="28" r="8" stroke="#f5f5f5" fill="none" stroke-width="3"/>`,
-    `<line x1="60" y1="36" x2="60" y2="65" stroke="#f5f5f5" stroke-width="3"/>`,
-    `<line x1="60" y1="45" x2="42" y2="58" stroke="#f5f5f5" stroke-width="3"/>`,
-    `<line x1="60" y1="45" x2="78" y2="58" stroke="#f5f5f5" stroke-width="3"/>`,
-    `<line x1="60" y1="65" x2="42" y2="85" stroke="#f5f5f5" stroke-width="3"/>`,
-    `<line x1="60" y1="65" x2="78" y2="85" stroke="#f5f5f5" stroke-width="3"/>`,
+    `<circle cx="60" cy="28" r="8" stroke="#e94560" fill="none" stroke-width="3"/>`,
+    `<line x1="60" y1="36" x2="60" y2="65" stroke="#e94560" stroke-width="3"/>`,
+    `<line x1="60" y1="45" x2="42" y2="58" stroke="#e94560" stroke-width="3"/>`,
+    `<line x1="60" y1="45" x2="78" y2="58" stroke="#e94560" stroke-width="3"/>`,
+    `<line x1="60" y1="65" x2="42" y2="85" stroke="#e94560" stroke-width="3"/>`,
+    `<line x1="60" y1="65" x2="78" y2="85" stroke="#e94560" stroke-width="3"/>`,
   ];
-  return `<svg viewBox="0 0 100 110" width="220" height="242" xmlns="http://www.w3.org/2000/svg">
-    <line x1="10" y1="105" x2="90" y2="105" stroke="#f5f5f5" stroke-width="3"/>
-    <line x1="10" y1="5" x2="10" y2="105" stroke="#f5f5f5" stroke-width="3"/>
-    <line x1="10" y1="5" x2="60" y2="5" stroke="#f5f5f5" stroke-width="3"/>
-    <line x1="60" y1="5" x2="60" y2="20" stroke="#f5f5f5" stroke-width="3"/>
+  return `<svg viewBox="0 0 100 110" width="180" height="200" xmlns="http://www.w3.org/2000/svg">
+    <line x1="10" y1="105" x2="90" y2="105" stroke="#e9e9f2" stroke-width="3"/>
+    <line x1="10" y1="5" x2="10" y2="105" stroke="#e9e9f2" stroke-width="3"/>
+    <line x1="10" y1="5" x2="60" y2="5" stroke="#e9e9f2" stroke-width="3"/>
+    <line x1="60" y1="5" x2="60" y2="20" stroke="#e9e9f2" stroke-width="3"/>
     ${partes.slice(0, errores).join("")}
   </svg>`;
 }
 
-const ESTILOS = `
-  <style>
+function inyectarEstilos(): void {
+  if (document.getElementById("ahorcado-estilos")) return;
+
+  const style = document.createElement("style");
+  style.id = "ahorcado-estilos";
+  style.textContent = `
+    html, body { margin: 0; padding: 0; }
     body {
-      margin: 0;
-      background: #1a1a2e;
-      color: #f0f0f5;
-      font-family: "Segoe UI", Roboto, Arial, sans-serif;
-    }
-    .ahorcado-container {
       min-height: 100vh;
+      background: #1a1a2e;
+      color: #e9e9f2;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+    #app {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 1.5rem;
+      box-sizing: border-box;
+    }
+    .ahorcado-card {
+      background: #16213e;
+      border-radius: 16px;
+      padding: 2rem 2.5rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       gap: 1.25rem;
-      padding: 2rem 1rem;
-      text-align: center;
+      max-width: 480px;
     }
-    .ahorcado-hangman {
-      display: flex;
-      justify-content: center;
-    }
-    .ahorcado-word {
-      font-size: 2.5rem;
+    .ahorcado-hangman { display: flex; justify-content: center; }
+    .ahorcado-palabra {
+      font-family: 'Courier New', monospace;
+      font-size: 2.25rem;
       font-weight: 700;
-      letter-spacing: 0.4rem;
-      font-family: "Courier New", monospace;
-      color: #ffffff;
+      letter-spacing: 0.35em;
+      text-align: center;
+      word-break: break-all;
     }
-    .ahorcado-lives {
+    .ahorcado-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
       font-size: 1.1rem;
-      color: #ff6b6b;
-      font-weight: 600;
     }
-    .ahorcado-message {
+    .ahorcado-vidas {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #e94560;
+    }
+    .ahorcado-mensaje {
       min-height: 1.6rem;
       font-size: 1.3rem;
       font-weight: 700;
-    }
-    .ahorcado-message.win {
-      color: #2ecc71;
-    }
-    .ahorcado-message.lose {
-      color: #e74c3c;
-    }
-    .ahorcado-message.hint {
-      color: #f1c40f;
-    }
-    .ahorcado-input {
-      padding: 0.5rem 0.75rem;
-      font-size: 1.1rem;
       text-align: center;
+    }
+    .ahorcado-mensaje--ganaste { color: #2ecc71; }
+    .ahorcado-mensaje--perdiste { color: #e94560; }
+    .ahorcado-mensaje--pista { color: #f1c40f; }
+    .ahorcado-input {
+      padding: 0.6rem 1rem;
       border-radius: 8px;
-      border: 2px solid #4e4e8f;
-      background: #22223a;
-      color: #f0f0f5;
-      outline: none;
-      width: 8rem;
+      border: 2px solid #0f3460;
+      background: #0f3460;
+      color: #fff;
+      font-size: 1.2rem;
+      text-align: center;
+      width: 140px;
     }
-    .ahorcado-input:focus {
-      border-color: #7f7fd5;
-    }
-    .ahorcado-actions {
+    .ahorcado-input:focus { outline: none; border-color: #e94560; }
+    .ahorcado-botones {
       display: flex;
       gap: 0.75rem;
       flex-wrap: wrap;
       justify-content: center;
     }
-    .btn-primary, .btn-secondary, .btn-start {
+    .ahorcado-btn {
+      padding: 0.6rem 1.2rem;
       border: none;
       border-radius: 8px;
-      padding: 0.6rem 1.4rem;
-      font-size: 1rem;
       font-weight: 700;
+      font-size: 1rem;
       cursor: pointer;
-      transition: transform 0.1s ease, opacity 0.1s ease;
+      transition: filter 0.15s ease, transform 0.15s ease;
     }
-    .btn-primary, .btn-start {
-      background: #2ecc71;
-      color: #0d2b1c;
-    }
-    .btn-secondary {
-      background: #f1c40f;
-      color: #3a2e00;
-    }
-    .btn-primary:hover, .btn-secondary:hover, .btn-start:hover {
-      transform: translateY(-2px);
-      opacity: 0.9;
-    }
-    .ahorcado-keyboard {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+    .ahorcado-btn:hover { filter: brightness(1.15); transform: translateY(-1px); }
+    .ahorcado-btn-primary { background: #2ecc71; color: #0f3460; }
+    .ahorcado-btn-secondary { background: #e94560; color: #fff; }
+    .ahorcado-teclado {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
       gap: 0.4rem;
-      max-width: 26rem;
     }
-    .key-btn {
-      width: 2.4rem;
-      height: 2.4rem;
+    .ahorcado-tecla {
+      width: 2.2rem;
+      height: 2.2rem;
       border-radius: 6px;
       border: none;
-      background: #4e4e8f;
-      color: #f0f0f5;
+      background: #0f3460;
+      color: #fff;
       font-weight: 700;
-      font-size: 1rem;
       cursor: pointer;
-      transition: background 0.1s ease, transform 0.1s ease;
+      transition: background 0.15s ease;
     }
-    .key-btn:hover:not(:disabled) {
-      background: #7f7fd5;
-      transform: translateY(-1px);
-    }
-    .key-btn:disabled {
-      background: #33334d;
-      color: #6c6c85;
+    .ahorcado-tecla:hover:not(:disabled) { background: #e94560; }
+    .ahorcado-tecla:disabled {
+      background: #25253d;
+      color: #5a5a75;
       cursor: not-allowed;
     }
-  </style>
-`;
+  `;
+  document.head.appendChild(style);
+}
 
 export function render(app: HTMLElement, juego: Ahorcado, lista: string[], arranco: boolean): void {
+  inyectarEstilos();
+
   if (!arranco) {
     app.innerHTML = `
-      ${ESTILOS}
-      <div class="ahorcado-container">
-        <button class="btn-start">Comenzar juego</button>
+      <div class="ahorcado-card">
+        <button class="ahorcado-btn ahorcado-btn-primary">Comenzar juego</button>
       </div>
     `;
     app.querySelector("button")!.addEventListener("click", () => render(app, juego, lista, true));
@@ -153,26 +150,40 @@ export function render(app: HTMLElement, juego: Ahorcado, lista: string[], arran
   let mostrandoPista = false;
 
   function renderizar(): void {
-    const gano = juego.gano();
-    const perdio = juego.perdio();
-    const terminado = gano || perdio;
-    const mensajeTexto = gano ? "GANASTE" : perdio ? "PERDISTE" : mostrandoPista ? juego.categoria() : juego.mensaje();
-    const mensajeClase = gano ? "ahorcado-message win" : perdio ? "ahorcado-message lose" : mostrandoPista ? "ahorcado-message hint" : "ahorcado-message";
+    const terminado = juego.gano() || juego.perdio();
+
+    const mensajeTexto = juego.gano()
+      ? "GANASTE"
+      : juego.perdio()
+        ? "PERDISTE"
+        : mostrandoPista
+          ? juego.categoria()
+          : juego.mensaje();
+
+    const mensajeClase = juego.gano()
+      ? "ahorcado-mensaje--ganaste"
+      : juego.perdio()
+        ? "ahorcado-mensaje--perdiste"
+        : mostrandoPista
+          ? "ahorcado-mensaje--pista"
+          : "";
 
     app.innerHTML = `
-      ${ESTILOS}
-      <div class="ahorcado-container">
+      <div class="ahorcado-card">
         <div class="ahorcado-hangman" data-testid="hangman-parts" data-parts="${juego.errores()}">${hangmanSVG(juego.errores())}</div>
-        <div class="ahorcado-word" data-testid="word">${juego.perdio() ? juego.palabraRevelada() : juego.palabraEnmascarada()}</div>
-        <div class="ahorcado-lives" data-testid="lives">${juego.vidas()}</div>
-        <div class="${mensajeClase}" data-testid="message">${mensajeTexto}</div>
-        <input class="ahorcado-input" type="text" />
-        <div class="ahorcado-actions">
-          ${terminado ? `<button class="btn-primary">Jugar de nuevo</button>` : ""}
-          <button class="btn-secondary">Ver pista</button>
+        <div data-testid="word" class="ahorcado-palabra">${juego.perdio() ? juego.palabraRevelada() : juego.palabraEnmascarada()}</div>
+        <div class="ahorcado-info">
+          <span>Vidas:</span>
+          <div data-testid="lives" class="ahorcado-vidas">${juego.vidas()}</div>
         </div>
-        <div class="ahorcado-keyboard">${"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(l =>
-          `<button class="key-btn" data-testid="key-${l}"${juego.letraUsada(l) ? " disabled" : ""}>${l}</button>`
+        <div data-testid="message" class="ahorcado-mensaje ${mensajeClase}">${mensajeTexto}</div>
+        <input type="text" class="ahorcado-input" maxlength="1" placeholder="Letra" />
+        <div class="ahorcado-botones">
+          ${terminado ? `<button class="ahorcado-btn ahorcado-btn-primary">Jugar de nuevo</button>` : ""}
+          <button class="ahorcado-btn ahorcado-btn-secondary">Ver pista</button>
+        </div>
+        <div class="ahorcado-teclado">${"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(l =>
+          `<button class="ahorcado-tecla" data-testid="key-${l}"${juego.letraUsada(l) ? " disabled" : ""}>${l}</button>`
         ).join("")}</div>
       </div>
     `;
@@ -203,12 +214,14 @@ export function render(app: HTMLElement, juego: Ahorcado, lista: string[], arran
       });
 
     if (terminado) {
-      app.querySelector("button")!.addEventListener("click", () => {
-        const nuevaPalabra = lista[Math.floor(Math.random() * lista.length)];
-        mostrandoPista = false;
-        juego.reiniciar(nuevaPalabra);
-        renderizar();
-      });
+      Array.from(app.querySelectorAll<HTMLButtonElement>("button"))
+        .find(b => b.textContent === "Jugar de nuevo")!
+        .addEventListener("click", () => {
+          mostrandoPista = false;
+          const nuevaPalabra = lista[Math.floor(Math.random() * lista.length)];
+          juego.reiniciar(nuevaPalabra);
+          renderizar();
+        });
     }
   }
 

@@ -1,7 +1,9 @@
 import { render } from "./main";
 import { Ahorcado } from "../domain/Ahorcado";
 
-const LISTA: { palabra: string; categoria: string }[] = [
+type PalabraConCategoria = { palabra: string; categoria: string };
+
+const LISTA: PalabraConCategoria[] = [
   { palabra: "GATO", categoria: "Animal" },
   { palabra: "PERRO", categoria: "Animal" },
   { palabra: "ROSA", categoria: "Flor" },
@@ -30,7 +32,7 @@ if (word !== null) {
 } else {
   const elegida = LISTA[Math.floor(Math.random() * LISTA.length)];
   juego = new Ahorcado(elegida.palabra, undefined, elegida.categoria);
-  listaActual = LISTA.map(entrada => entrada.palabra);
+  listaActual = LISTA.map(p => p.palabra);
 }
 
 render(app, juego, listaActual, word !== null);

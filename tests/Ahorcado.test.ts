@@ -119,6 +119,12 @@ it("reiniciar() resetea las vidas y la palabra enmascarada", () => {
   expect(juego.palabraEnmascarada()).toBe("_ _ _");
 });
 
+it("reiniciar() también actualiza la categoría de la nueva palabra", () => {
+  const juego = new Ahorcado("GATO", undefined, "Animal");
+  juego.reiniciar("MESA", "Mueble");
+  expect(juego.categoria()).toBe("Mueble");
+});
+
 it("errores() devuelve la cantidad de letras falladas", () => {
   const juego = new Ahorcado("GATO");
   juego.adivinar("E");

@@ -64,8 +64,9 @@ mensaje(): string {
   return this.mensajeActual;
 }
 
-reiniciar(nuevaPalabra: string): void {
+reiniciar(nuevaPalabra: string, categoria: string = ""): void {
   this.palabra = nuevaPalabra;
+  this.categoriaActual = categoria;
   this.vidasRestantes = 6;
   this.letrasAdivinadas = [];
   this.letrasIntentadas = [];
