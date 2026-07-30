@@ -1,7 +1,16 @@
 import { render } from "./main";
 import { Ahorcado } from "../domain/Ahorcado";
 
-const LISTA = ["GATO", "PERRO", "PATO", "CASA", "ÁRBOL"];
+const LISTA: { palabra: string; categoria: string }[] = [
+  { palabra: "GATO", categoria: "Animal" },
+  { palabra: "PERRO", categoria: "Animal" },
+  { palabra: "ROSA", categoria: "Flor" },
+  { palabra: "CASA", categoria: "Construcción" },
+  { palabra: "ARBOL", categoria: "Naturaleza" },
+  { palabra: "AVION", categoria: "Transporte" },
+  { palabra: "GUITARRA", categoria: "Instrumento" },
+  { palabra: "FUTBOL", categoria: "Deporte" },
+];
 
 const app = document.getElementById("app")!;
 const params = new URLSearchParams(window.location.search);
@@ -19,8 +28,9 @@ if (word !== null) {
   juego = new Ahorcado([lista]);
   listaActual = [lista];
 } else {
-  juego = new Ahorcado(LISTA);
-  listaActual = LISTA;
+  const elegida = LISTA[Math.floor(Math.random() * LISTA.length)];
+  juego = new Ahorcado(elegida.palabra, undefined, elegida.categoria);
+  listaActual = LISTA.map(entrada => entrada.palabra);
 }
 
 render(app, juego, listaActual, word !== null);
